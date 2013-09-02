@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="old_sound_rabbit_mq.rpc_client.class">Rezzza\JobFlowBundle\RabbitMq\JobRpcClient</parameter>
+    </parameters>
+
+    <services>
+        <service id="job_flow.consumer" class="Rezzza\JobFlowBundle\RabbitMq\ETLConsumer">
+            <argument type="service" id="job_flow.factory" />
+            <argument type="service" id="old_sound_rabbit_mq.etl_producer" />
+        </service>
+
+        <service id="job_flow.rpc_server" class="Rezzza\JobFlowBundle\RabbitMq\JobRpcServer">
+            <argument type="service" id="job_flow.factory" />
+            <!--<argument type="service" id="old_sound_rabbit_mq.etl_producer" />-->
+            <argument type="service" id="old_sound_rabbit_mq.job_rpc" />
+        </service>
+    </services>
+</container>

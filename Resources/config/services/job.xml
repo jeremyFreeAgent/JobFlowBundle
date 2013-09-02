@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="job_flow.registry.class">Rezzza\JobFlow\JobRegistry</parameter>
+        <parameter key="job_flow.factory.class">Rezzza\JobFlow\JobFactory</parameter>
+        <parameter key="job_flow.extensions.class">Rezzza\JobFlow\Extension\DI\DependencyInjectionExtension</parameter>
+        <parameter key="job_flow.extension.core.class">Rezzza\JobFlow\Extension\Core\CoreExtension</parameter>
+        <parameter key="job_flow.transport.php.class">Rezzza\JobFlow\Extension\Core\Transport\PhpTransport</parameter>
+    </parameters>
+
+    <services>
+        <service id="job_flow.extensions" class="%job_flow.extensions.class%" public="false">
+            <argument type="service" id="service_container" />
+            <!-- All services with tag "job.type" are inserted here by JobPass -->
+            <argument type="collection" />
+            <!-- All services with tag "job.extension" are inserted here by JobPass -->
+            <argument type="collection" />
+            <!-- All services with tag "job.transport" are inserted here by JobPass -->
+            <argument type="collection" />
+        </service>
+
+        <service id="job_flow.extension.core" class="%job_flow.extension.core.class%">
+            <tag name="job.extension" alias="core" />
+        </service>
+
+        <service id="job_flow.transport.php" class="%job_flow.transport.php.class%">
+            <tag name="job.transport" alias="php" />
+        </service>
+
+        <service id="job_flow.registry" class="%job_flow.registry.class%">
+            <argument type="collection">
+                <argument type="service" id="job_flow.extensions" />
+            </argument>
+        </service>
+        
+        <service id="job_flow.factory" class="%job_flow.factory.class%">
+            <argument type="service" id="job_flow.registry" />
+        </service>
+    </services>
+</container>

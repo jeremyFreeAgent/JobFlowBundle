@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="job_flow.type.job.class">Rezzza\JobFlow\Extension\Core\Type\JobType</parameter>
+        <parameter key="job_flow.type.extractor.class">Rezzza\JobFlow\Extension\ETL\Type\Extractor\ExtractorType</parameter>
+        <parameter key="job_flow.type.transformer.class">Rezzza\JobFlow\Extension\ETL\Type\Transformer\TransformerType</parameter>
+        <parameter key="job_flow.type.callback_transformer.class">Rezzza\JobFlow\Extension\ETL\Type\Transformer\CallbackTransformerType</parameter>
+        <parameter key="job_flow.type.loader.class">Rezzza\JobFlow\Extension\ETL\Type\Loader\LoaderType</parameter>
+        <parameter key="job_flow.type.file_loader.class">Rezzza\JobFlow\Extension\ETL\Type\Loader\FileLoaderType</parameter>
+    </parameters>
+
+    <services>
+        <service id="job_flow.type.job" class="%job_flow.type.job.class%">
+            <tag name="job.type" alias="job" />
+        </service>
+
+        <service id="job_flow.type.extractor" class="%job_flow.type.extractor.class%">
+            <tag name="job.type" alias="extractor" />
+        </service>
+
+        <service id="job_flow.type.transformer" class="%job_flow.type.transformer.class%">
+            <tag name="job.type" alias="transformer" />
+        </service>
+        <service id="job_flow.type.callback_transformer" class="%job_flow.type.callback_transformer.class%">
+            <tag name="job.type" alias="callback_transformer" />
+        </service>
+
+        <service id="job_flow.type.loader" class="%job_flow.type.loader.class%">
+            <tag name="job.type" alias="loader" />
+        </service>
+        <service id="job_flow.type.file_loader" class="%job_flow.type.file_loader.class%">
+            <tag name="job.type" alias="file_loader" />
+        </service>
+    </services>
+</container>

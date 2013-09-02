@@ -1,0 +1,34 @@
+{
+    "name": "rezzza/jobflow-bundle",
+    "description": "Integration of JobFlow into Symfony2",
+    "keywords": ["batch", "job", "cli", "etl"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Community",
+            "homepage": "https://github.com/rezzza/JobFlowBundle/graphs/contributors"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "~2.3",
+        "rezzza/jobflow": "*@dev",
+        "symfony/console": "~2.3"
+    },
+    "require-dev": {
+        "atoum/atoum": "dev-master"
+    },
+    "suggest": {
+        "oldsound/rabbitmq-bundle": "To use RabbitMq Transport"
+    },
+    "autoload": {
+        "psr-0": { "Rezzza\\JobFlowBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Rezzza/JobFlowBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
